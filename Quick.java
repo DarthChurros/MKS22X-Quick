@@ -25,6 +25,16 @@ public class Quick {
     return index;
   }
 
+  public static int quickselect(int[] data, int k) {
+    int start = 0;
+    int end = data.length - 1;
+    while (data[end] != k) {
+      end = partition(data, start, end);
+    }
+    return end;
+
+  }
+
   private static void swap(int[] data, int a, int b) {
     int temp = data[a];
     data[a] = data[b];
