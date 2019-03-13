@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Quick {
   public static int partition(int[] data, int start, int end) {
     int index = start + (int)(Math.random() * (end - start + 1));
@@ -28,11 +30,16 @@ public class Quick {
   public static int quickselect(int[] data, int k) {
     int start = 0;
     int end = data.length - 1;
-    while (data[end] != k) {
-      end = partition(data, start, end);
+    int pivot = 0;
+    boolean run = true;
+    while (run) {
+      pivot = partition(data, start, end);
+      System.out.println(Arrays.toString(data) +",  "+pivot);
+      if (k > pivot) start = pivot + 1;
+      else if (k < pivot) end = pivot - 1;
+      else run = false;
     }
-    return end;
-
+    return data[pivot];
   }
 
   private static void swap(int[] data, int a, int b) {
