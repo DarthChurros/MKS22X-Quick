@@ -2,29 +2,33 @@ import java.util.Arrays;
 
 public class Quick {
   public static int partition(int[] data, int start, int end) {
-    int index = start + (int)(Math.random() * (end - start + 1));
-    swap(data, 0, index);
+    int pivot = start + (int)(Math.random() * (end - start + 1));
+    swap(data, start, pivot);
+    int hi = end;
+    pivot = start;
     start++;
-    while (start < end) {
+    while (start < hi) {
       if (data[start] > data[0]) {
-        swap(data, start, end);
-        end--;
-      } else if (data[end] < data[0]) {
-        swap(data, start, end);
+        swap(data, start, hi);
+        hi--;
+      } else if (data[hi] < data[0]) {
+        swap(data, start, hi);
         start++;
       } else {
         start++;
+        hi--;
       }
+      //System.out.println(Arrays.toString(data) + ", start="+start+",end="+hi);
     }
-    for (int i = start; i <= end; i++) {
-      if (data[i] > data[0]) {
-        swap(data, 0, i - 1);
-        index = i - 1;
+    for (int i = pivot+1; i <= end; i++) {
+      if (data[i] >= data[pivot]) {
+        swap(data, pivot, i - 1);
+        pivot = i - 1;
         i = end + 1;
       }
     }
-    if (data[0] > data[data.length - 1]) swap(data, 0, data.length - 1);
-    return index;
+    if (data[0] > data[end]) swap(data, pivot, end);
+    return pivot;
   }
 
   public static int quickselect(int[] data, int k) {
@@ -34,7 +38,7 @@ public class Quick {
     boolean run = true;
     while (run) {
       pivot = partition(data, start, end);
-      System.out.println(Arrays.toString(data) +",  "+pivot);
+      //System.out.println(Arrays.toString(data) +",  "+pivot);
       if (k > pivot) start = pivot + 1;
       else if (k < pivot) end = pivot - 1;
       else run = false;
