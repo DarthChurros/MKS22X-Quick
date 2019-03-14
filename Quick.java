@@ -8,10 +8,10 @@ public class Quick {
     pivot = start;
     start++;
     while (start < hi) {
-      if (data[start] > data[0]) {
+      if (data[start] > data[pivot]) {
         swap(data, start, hi);
         hi--;
-      } else if (data[hi] < data[0]) {
+      } else if (data[hi] < data[pivot]) {
         swap(data, start, hi);
         start++;
       } else {
@@ -38,7 +38,7 @@ public class Quick {
     boolean run = true;
     while (run) {
       pivot = partition(data, start, end);
-      //System.out.println(Arrays.toString(data) +",  "+pivot);
+      System.out.println(Arrays.toString(data) +"start="+start+", end="+end+",pivot="+pivot);
       if (k > pivot) start = pivot + 1;
       else if (k < pivot) end = pivot - 1;
       else run = false;
