@@ -22,9 +22,8 @@ public class Quick {
     }
     int lastLeft = pivot;
     for (int i = pivot+1; i <= end; i++) {
-      if (data[i] < data[pivot]) {
-        lastLeft = i;
-      }
+      if (data[i] < data[pivot]) lastLeft = i;
+      if (data[i] > data[pivot]) i = end + 1;
     }
     swap(data, pivot, lastLeft);
     return lastLeft;
