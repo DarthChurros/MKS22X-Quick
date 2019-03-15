@@ -20,15 +20,14 @@ public class Quick {
       }
       //System.out.println(Arrays.toString(data) + ", start="+start+",end="+hi);
     }
+    int lastLeft = pivot;
     for (int i = pivot+1; i <= end; i++) {
-      if (data[i] >= data[pivot]) {
-        swap(data, pivot, i - 1);
-        pivot = i - 1;
-        i = end + 1;
+      if (data[i] < data[pivot]) {
+        lastLeft = i;
       }
     }
-    if (data[0] > data[end]) swap(data, pivot, end);
-    return pivot;
+    swap(data, pivot, lastLeft);
+    return lastLeft;
   }
 
   public static int quickselect(int[] data, int k) {
@@ -38,7 +37,7 @@ public class Quick {
     boolean run = true;
     while (run) {
       pivot = partition(data, start, end);
-      System.out.println(Arrays.toString(data) +"start="+start+", end="+end+",pivot="+pivot);
+      //System.out.println(Arrays.toString(data) +"start="+start+", end="+end+",pivot="+pivot);
       if (k > pivot) start = pivot + 1;
       else if (k < pivot) end = pivot - 1;
       else run = false;
