@@ -44,6 +44,17 @@ public class Quick {
     return data[pivot];
   }
 
+  public static void quicksort(int[] data) {
+    sort(data, 0, data.length - 1);
+  }
+
+  private static void sort(int[] data, int start, int end) {
+    if (start >= end) return;
+    int pivot = partition(data, start, end);
+    sort(data, start, pivot - 1);
+    sort(data, pivot + 1, end);
+  }
+
   private static void swap(int[] data, int a, int b) {
     int temp = data[a];
     data[a] = data[b];
