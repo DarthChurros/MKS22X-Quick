@@ -29,7 +29,7 @@ public class Quick {
     return lastLeft;
   }
 
-  private int getPivot(int[] data, int start, int end) {
+  private static int getPivot(int[] data, int start, int end) {
     int mid = (start + end) / 2;
     if (data[start] > data[end]) {
       if (data[end] > data[mid]) return end;
