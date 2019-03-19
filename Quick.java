@@ -29,15 +29,16 @@ public class Quick {
     return lastLeft;
   }
 
-  private int median(int a, int b, int c) {
-    if (a > b) {
-      if (b > c) return b;
-      if (a > c) return c;
-      return a;
+  private int getPivot(int[] data, int start, int end) {
+    int mid = (start + end) / 2;
+    if (data[start] > data[end]) {
+      if (data[end] > data[mid]) return data[end];
+      if (data[start] > data[mid]) return data[mid];
+      return data[start];
     } else {
-      if (a > c) return a;
-      if (b > c) return c;
-      return b;
+      if (data[start] > data[mid]) return data[start];
+      if (data[end] > data[mid]) return data[start];
+      return data[end];
     }
   }
 
