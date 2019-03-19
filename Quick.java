@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class Quick {
   public static int partition(int[] data, int start, int end) {
-    int pivot = start + (int)(Math.random() * (end - start + 1));
+    int pivot = getPivot(data, start, end);
     swap(data, start, pivot);
     int hi = end;
     pivot = start;
@@ -32,13 +32,13 @@ public class Quick {
   private int getPivot(int[] data, int start, int end) {
     int mid = (start + end) / 2;
     if (data[start] > data[end]) {
-      if (data[end] > data[mid]) return data[end];
-      if (data[start] > data[mid]) return data[mid];
-      return data[start];
+      if (data[end] > data[mid]) return end;
+      if (data[start] > data[mid]) return mid;
+      return start;
     } else {
-      if (data[start] > data[mid]) return data[start];
-      if (data[end] > data[mid]) return data[start];
-      return data[end];
+      if (data[start] > data[mid]) return start;
+      if (data[end] > data[mid]) return mid;
+      return end;
     }
   }
 
