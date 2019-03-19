@@ -14,6 +14,12 @@ public class Quick {
       } else if (data[hi] < data[pivot]) {
         swap(data, start, hi);
         start++;
+      } else if (data[start] == data[pivot] && (((int)Math.random())*2)%2 == 0) {
+        swap(data, start, hi);
+        hi--;
+      } else if (data[hi] == data[pivot] && (((int)Math.random())*2)%2 == 0) {
+        swap(data, start, hi);
+        start++;
       } else {
         start++;
         hi--;
@@ -72,5 +78,24 @@ public class Quick {
     int temp = data[a];
     data[a] = data[b];
     data[b] = temp;
+  }
+
+  public static void main(String[] args) {
+    int[] test = new int[10];
+    for (int i = 0; i < 100; i++) {
+      for (int j = 0; j < 10; j++) {
+       test[j] = (int)(Math.random() * 20);
+      }
+      //System.out.println(partition(test, 0, 7));
+      int k = partition(test, 0, 9);
+      for (int j = 0; j < 10; j++) {
+        if (j < k && test[j] > test[k] || j > k && test[j] < test[k]) {
+          System.out.println("FAIL on test "+i);
+          System.out.println(k+"\n"+Arrays.toString(test));
+          System.exit(1);
+        }
+      }
+    }
+    System.out.println("PASS");
   }
 }
