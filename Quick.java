@@ -29,6 +29,18 @@ public class Quick {
     return lastLeft;
   }
 
+  private int median(int a, int b, int c) {
+    if (a > b) {
+      if (b > c) return b;
+      if (a > c) return c;
+      return a;
+    } else {
+      if (a > c) return a;
+      if (b > c) return c;
+      return b;
+    }
+  }
+
   public static int quickselect(int[] data, int k) {
     int start = 0;
     int end = data.length - 1;
@@ -45,7 +57,7 @@ public class Quick {
   }
 
   public static void quicksort(int[] data) {
-    sort(data, 0, data.length - 1);
+    sort(data, 0, data.length);
   }
 
   private static void sort(int[] data, int start, int end) {
