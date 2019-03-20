@@ -35,6 +35,28 @@ public class Quick {
     return lastLeft;
   }
 
+  public static int[] partitionDutch(int[] data, int start, int end) {
+    swap(data, start, getPivot(data, start, end));
+    int gt = end;
+    int lt = start;
+    int i = start + 1;
+    while (i <= gt) {
+      //System.out.println(Arrays.toString(data)+" lt="+lt+",gt="+gt+",i="+i);
+      if (data[i] < data[lt]) {
+        swap(data, i, lt);
+        lt++;
+        i++;
+      } else if (data[i] > data[lt]) {
+        swap(data, i, gt);
+        gt--;
+      } else i++;
+      //try {
+      //  Thread.sleep(1000);
+      //} catch (InterruptedException e) {}
+    }
+    return new int[] {lt, gt};
+  }
+
   private static int getPivot(int[] data, int start, int end) {
     int mid = (start + end) / 2;
     if (data[start] > data[end]) {
@@ -84,18 +106,21 @@ public class Quick {
     int[] test = new int[10];
     for (int i = 0; i < 100; i++) {
       for (int j = 0; j < 10; j++) {
-       test[j] = (int)(Math.random() * 20);
+       test[j] = (int)(Math.random() * 3);
       }
       //System.out.println(partition(test, 0, 7));
-      int k = partition(test, 0, 9);
+      int[] k = partitionDutch(test, 0, 9);
       for (int j = 0; j < 10; j++) {
-        if (j < k && test[j] > test[k] || j > k && test[j] < test[k]) {
+        if (j < k[0] && test[j] >= test[k[0]]
+        || j > k[1] && test[j] <= test[k[1]]
+        || j >= k[0] && j <= k[1] && (test[j] != test[k[0]] || test[j] != test[k[1]])) {
           System.out.println("FAIL on test "+i);
           System.out.println(k+"\n"+Arrays.toString(test));
           System.exit(1);
         }
       }
     }
+    System.out.println(Arrays.toString(test));
     System.out.println("PASS");
   }
 }
