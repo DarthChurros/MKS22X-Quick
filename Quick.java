@@ -103,14 +103,14 @@ public class Quick {
   }
 
   public static void main(String[] args) {
-    int[] test = new int[10];
-    for (int i = 0; i < 100; i++) {
-      for (int j = 0; j < 10; j++) {
-       test[j] = (int)(Math.random() * 3);
+    int[] test = new int[20];
+    for (int i = 0; i < 10; i++) {
+      for (int j = 0; j < 20; j++) {
+       test[j] = (int)(Math.random() * 5);
       }
       //System.out.println(partition(test, 0, 7));
-      int[] k = partitionDutch(test, 0, 9);
-      for (int j = 0; j < 10; j++) {
+      int[] k = partitionDutch(test, 0, 19);
+      for (int j = 0; j < 20; j++) {
         if (j < k[0] && test[j] >= test[k[0]]
         || j > k[1] && test[j] <= test[k[1]]
         || j >= k[0] && j <= k[1] && (test[j] != test[k[0]] || test[j] != test[k[1]])) {
@@ -120,7 +120,7 @@ public class Quick {
         }
       }
     }
-    System.out.println(Arrays.toString(test));
+    //System.out.println(Arrays.toString(test));
     System.out.println("PASS");
   }
 }
