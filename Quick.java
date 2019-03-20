@@ -91,6 +91,10 @@ public class Quick {
 
   private static void sort(int[] data, int start, int end) {
     if (start >= end) return;
+    //if (end - start <= 5) {
+    //  insertionSort(data, start, end);
+    //  return;
+    //}
     int[] pivot = partitionDutch(data, start, end);
     sort(data, start, pivot[0] - 1);
     sort(data, pivot[1] + 1, end);
@@ -100,6 +104,19 @@ public class Quick {
     int temp = data[a];
     data[a] = data[b];
     data[b] = temp;
+  }
+
+  private static void insertionSort(int[] ary, int start, int end) {
+    int temp, j;
+    for (int i = start + 1; i <= end; i++) {
+      temp = ary[i];
+      j = i - 1;
+      while (j >= 0 && ary[j] > temp) {
+        ary[j+1] = ary[j];
+        j--;
+      }
+      ary[j+1] = temp;
+    }
   }
 
   public static void main(String[] args) {
